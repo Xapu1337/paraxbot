@@ -1,0 +1,23 @@
+{
+  "name": "paraxbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Xapu1337/paraxbot.git",
+  "author": "Dominik K. <xapursplaz@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "start:dev": "ts-node-dev src/index.ts",
+    "start:prod": "node dist/index.js",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dank-twitch-irc": "^4.3.0",
+    "dotenv": "^10.0.0",
+    "klaw": "^4.0.1",
+    "table": "^6.7.3",
+    "ts-node": "^10.4.0"
+  }
+}
