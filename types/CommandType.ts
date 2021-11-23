@@ -1,7 +1,9 @@
 import ParaxClient from "../src/structs/ParaxClient";
+import {Message} from "./global";
 
 interface RunOptions {
     client: ParaxClient;
+    message: Message;
     args: string[];
 }
 
