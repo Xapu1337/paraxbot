@@ -5,12 +5,14 @@ import Collection from "@discordjs/collection";
 import {Event} from "../../types/Event";
 import {ChatClient, ClientEvents} from "dank-twitch-irc";
 import {ClientConfiguration} from "dank-twitch-irc/lib/config/config";
+import {Client} from "discord.js";
 
 
 export default class ParaxClient extends ChatClient {
     public commands: Collection<string, CommandType> = new Collection();
     public events: Collection<string, Event<any>> = new Collection();
     public aliases: Collection<string, string> = new Collection();
+    public client: Client;
 
     constructor(options: ClientConfiguration) {
         super(options);
@@ -22,12 +24,17 @@ export default class ParaxClient extends ChatClient {
 
     async start() {
         await this.connect().then(() => {
-            console.log(`Connected to ${"Twitch".magenta} as ${process.env["BOT_USERNAME"]}.`);
+            console.log(`Logged in to ${"Twitch".magenta} as ${process.env["BOT_USERNAME"].cyan.bgBlack}.`);
         });
         await this.registerModules();
         await this.joinAll([process.env["CHANNEL_NAME"]]).then(() => {
-            console.log(`Joined channel ${"#" + process.env["CHANNEL_NAME"]}.`);
+            console.log(`Joined channel ${`#${process.env["CHANNEL_NAME"]}`.cyan.bgBlack}.`);
         });
+        this.client = new Client({ intents: 32767 });
+        await this.client.login(process.env["DISCORD_BOT_TOKEN"]).then(() => {
+            console.log(`Logged in to ${"Discord".blue} as ${this.client.user.tag.cyan.bgBlack}.`);
+        });
+
     }
 
 
